@@ -3,7 +3,7 @@ Name:		cyber-contact
 Version:	%{!?version:1.0.0}%{?version}
 # ${commit_count}_${git_commit}
 Release:	%{!?release:1}%{?release}
-Summary:	Cyberlife QRcode API
+Summary:	Cyberlife Contact API
 
 Group:		Application
 License:	GPL
@@ -53,7 +53,6 @@ systemctl restart nginx.service
 /usr/bin/systemctl daemon-reload
 
 %files
-/etc/cyberlife/*
 /etc/nginx/location.d/*
 /etc/nginx/conf.d/*
 /opt/cyberlife/service/cyber-contact/*

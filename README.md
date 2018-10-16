@@ -1,5 +1,5 @@
 # cyber-contact
-contact on website by tornado
+contact on website by tornado, show how to use tornado_mysql.
 make rpm package on centos7, but I think this project can run on anything linux.
 
 ## 功能

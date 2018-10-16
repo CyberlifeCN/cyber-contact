@@ -81,7 +81,7 @@ class contact_message_dao(singleton):
     def find_pagination(self, idx, limit):
         # 执行一个查询
         sql = "SELECT _id, email, content, ctime" +\
-            " FROM contact_message " +\
+            " FROM contact_message ORDER BY ctime desc" +\
             " LIMIT " + str(idx) + "," + str(limit)
         logging.debug("sql: %r", sql)
 

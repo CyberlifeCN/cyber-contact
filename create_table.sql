@@ -1,12 +1,12 @@
 REPLACE INTO mysql.user (Host, User, Password) VALUES('localhost', 'cyber', password('cyber') );
 FLUSH PRIVILEGES;
 CREATE DATABASE IF NOT EXISTS cyber;
-GRANT ALL PRIVILEGES ON cyber.* TO cdfs@localhost IDENTIFIED BY 'cyber';
+GRANT ALL PRIVILEGES ON cyber.* TO cyber@localhost IDENTIFIED BY 'cyber';
 FLUSH PRIVILEGES;
 
 USE cyber;
 
-CREATE TABLE IF NOT EXISTS `contact` (
+CREATE TABLE IF NOT EXISTS `contact_message` (
  `_id` char(32) NOT NULL COMMENT 'uuid',
  `email` varchar(255) DEFAULT NULL,
  `content` varchar(2000) DEFAULT NULL,

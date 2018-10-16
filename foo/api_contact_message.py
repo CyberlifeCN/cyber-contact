@@ -23,6 +23,9 @@ import sys
 import os
 import json as JSON # 启用别名，不会跟方法里的局部变量混淆
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../dao"))
+
 from comm import *
 from global_const import *
 from base_handler import *
@@ -48,7 +51,7 @@ class ApiContactMessageXHR(tornado.web.RequestHandler):
     @swagger.operation(nickname='post')
     def post(self):
         """
-            @description: 生成联系信息
+            @description: 创建联系消息
 
             @param body:
             @type body: C{MessageReq}
@@ -77,10 +80,11 @@ class ApiContactMessageXHR(tornado.web.RequestHandler):
             return
 
         timestamp = current_timestamp()
-        _id = generate_uuid_str()
-        yield contact_dao.contact_dao().insert(_id, message["email"], message["content"], timestamp)
+        message["_id"] = generate_uuid_str()
+        message["ctime"] = timestamp
+        yield contact_message_dao.contact_message_dao().insert(message)
 
-        logging.info("Success[200]: create contact=[%r]", message)
+        logging.info("Success[200]: create contact_message=[%r]", message)
         self.set_status(200) # OK
         self.write(JSON.dumps({"errCode":200,"errMsg":"Success"}))
         self.finish()
@@ -91,7 +95,7 @@ class ApiContactMessageXHR(tornado.web.RequestHandler):
     @swagger.operation(nickname='get')
     def get(self):
         """
-            @description: 分页查询app客户端
+            @description: 分页查询联系消息客户端
 
             @param page: default=1
             @type page: L{int}
@@ -118,8 +122,8 @@ class ApiContactMessageXHR(tornado.web.RequestHandler):
         total_num = 0
         total_page = 0
 
-        messages = yield contact_dao.contact_dao().find_pagination(idx, limit)
-        total_num = yield contact_dao.contact_dao().count_pagination(idx, limit)
+        messages = yield contact_message_dao.contact_message_dao().find_pagination(idx, limit)
+        total_num = yield contact_message_dao.contact_message_dao().count_pagination(idx, limit)
 
         if total_num % int(limit) == 0:
             total_page = int(total_num / int(limit))
@@ -127,7 +131,7 @@ class ApiContactMessageXHR(tornado.web.RequestHandler):
             total_page = int(total_num / int(limit)) + 1
         rs = {"page":page, "total_page":total_page, "data":messages}
 
-        logging.info("OK(200): query messages: page=[%r] total_page=[%r] num=[%r]", page, total_page, len(messages))
+        logging.info("Success[200]: query messages: page=[%r] total_page=[%r] num=[%r]", page, total_page, len(messages))
         self.set_status(200) # OK
         self.write(JSON.dumps({"errCode":200,"errMsg":"Success","rs":rs}))
         self.finish()
