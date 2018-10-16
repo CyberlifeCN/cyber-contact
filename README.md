@@ -12,6 +12,7 @@ http://contact.cyber-life.cn/swagger/spec.html
 
 ## Demo
 * http://contact.cyber-life.cn/contact/web/index
+* http://contact.cyber-life.cn/contact/web/messages
 
 
 ## 安装软件包

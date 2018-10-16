@@ -1,0 +1,29 @@
+<!-- 顶部 -->
+  <div class="top">
+    <div class="top_main">
+      <span>
+        <a href="#">登录</a>|<a href="#">注册</a>
+      </span>
+    </div>
+  </div>
+<div class="search_all">
+  <div class="search">
+    <div class="nav_logo">
+      <h1>Demo</h1>
+    </div>
+    <div class="search_main">
+      <input type="text" id="searchText" class="search_sr" placeholder="输入关键词"  />
+      <input type="button" value="搜索" id="s-btn" class="search_sub" />
+    </div>
+
+  </div>
+</div>
+<script type="text/javascript">
+  // $("#searchText").val("输入关键词");
+  $("#s-btn").on('click',function(){
+    var q = $("#searchText").val();
+        q = encodeURI(encodeURI(q));
+    location.href="#?q="+q;
+  });
+</script>
+<!-- 顶部 -->

@@ -36,6 +36,7 @@ def map():
 
         (r'/contact/api/message', getattr(api_contact_message, 'ApiContactMessageXHR')),
         (r'/contact/web/index', getattr(web, 'WebContactIndexHandle')),
+        (r'/contact/web/messaages', getattr(web, 'WebMessageListHandle')),
         (r'/', getattr(web, 'WebContactIndexHandle')),
 
         # comm

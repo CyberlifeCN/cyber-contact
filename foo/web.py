@@ -38,3 +38,9 @@ class WebContactIndexHandle(tornado.web.RequestHandler):
     def get(self):
         logging.info("GET %r", self.request.uri)
         self.render('contact.html')
+
+
+class WebMessageListHandle(tornado.web.RequestHandler):
+    def get(self):
+        logging.info("GET %r", self.request.uri)
+        self.render('messages.html')

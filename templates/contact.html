@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>联系我们</title>
+	<metahttp-equiv="X-UA-Compatible"content="IE=8"><!--以IE8模式渲染-->
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link type="text/css" rel="stylesheet" href="{{ static_url('weui/css/weui.min.css') }}">
+	<link type="text/css" rel="stylesheet" href="{{ static_url('weui/css/jquery-weui.min.css') }}">
+	<link href="{{ static_url('leshui/css/three.css') }}" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
+</head>
+<html>
+<body>
+	<!-- socialbar -->
+	{% module Template("block-socialbar.html") %}
+	<!-- /socialbar -->
+	<!-- 导航 -->
+	<div class="nav_all">
+		<div class="nav">
+			<a href="/">首页</a>
+		</div>
+	</div>
+	<!-- 手机版头部 -->
+		<div class="ph_nav">
+			<h1><img src="{{ static_url('leshui/images/nav.png') }}"></h1>
+			<h2><img src="{{ static_url('leshui/images/cha.png') }}"></h2>
+			<ul>
+				<li><a href="/">首页</a></li>
+			</ul>
+		</div>
+	<!-- 导航 -->
+
+<!-- 主题内容 -->
+<div class="th_main">
+	<div class="ht_bot">
+		<div class="ht_bot_left">
+			<!-- 添加留言 -->
+			<div class="ht_hot_left_toll">
+				<h1>给我们留言</h1>
+				<input type="text" value="" id="phone" placeholder="联系电话">
+				<textarea rows="10" cols="30" placeholder="添加留言内容" id="message" class="toll_true" style="resize:none;" ></textarea>
+				<div class="send-message" style="display:none;font-size:12px;"></div>
+				<input type="button" value="留言" id="sendComment-btn" class="toll_fb">
+			</div>
+		</div>
+		<!-- 右侧部分 -->
+		<div class="ht_bot_right">
+			<div class="ht_bot_right_four">
+				<h1>联系我们</h1>
+				<i><img src="{{ static_url('leshui/images/sf.png') }}">北京市西城区南线阁街10号基业大厦707</i>
+				<i><img src="{{ static_url('leshui/images/dh.png') }}">010-63204755</i>
+				<i><img src="{{ static_url('leshui/images/yx.png') }}">3380928340@qq.com</i>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 主题内容 -->
+<!-- Footer -->
+{% module Template("block-footer.html") %}
+<!-- End Footer -->
+<script type="text/javascript" src="{{ static_url('leshui/js/index.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('leshui/js/three.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('weui/js/jquery-weui.min.js') }}"></script>
+<script>
+	$(function() {
+		$('#dw').hide();
+		// 添加留言操作
+		$('#sendComment-btn').on('click',function(){
+				var message = $('#message').val();
+				function hide(){
+					$(".send-message").hide();
+				};
+				var data = {
+					email: $('#phone').val(),
+					content: message,
+				};
+				var json = JSON.stringify(data);
+				console.log(json);
+
+				if(phone == "" || message == ""){
+					$(".send-message").show().css({"color":"red"}).html("填写不完整");
+					setTimeout(hide,2000);
+					return;
+				}else{
+					$.ajax({
+						type: "POST",
+						url: "/contact/api/message",
+						dataType: "json",
+						data: json,
+						contentType: 'application/json',
+						success: function(data, status, xhr) {
+							$("#phone").val("");
+							$("#message").val("");
+							$(".send-message").show().css({"color":"#90e012"}).html("留言成功！");
+							setTimeout(hide,3000);
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrown) {
+							console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+						},
+						complete: function(XMLHttpRequest, textStatus) {
+							this; // 调用本次AJAX请求时传递的options参数
+						}
+					});
+				}
+		})
+
+	});
+</script>
+</body>
+</html>
