@@ -3,7 +3,8 @@ contact on website by tornado, show how to use tornado_mysql.
 make rpm package on centos7, but I think this project can run on anything linux.
 
 ## 功能
-* 用户在网站上输入联系信息
+* 用户在网站上输入联系消息
+* 消息列表
 
 
 ## REST API文档
