@@ -1,0 +1,23 @@
+# Development, documentation & testing requirements.
+-e .
+
+# yum -y install mariadb mariadb-server
+mariadb-server
+
+# pip install tornado==4.3
+tornado=4.3
+
+# pip install tornado-swagger
+# git clone https://github.com/SerenaFeng/tornado-swagger.git
+# cd tornado-swagger
+# python setup.py install
+tornado-swagger
+
+# pip install tornado_mysql
+tornado_mysql
+
+# pip install qrcode
+qrcode
+
+# yum install python-imaging
+PIL
