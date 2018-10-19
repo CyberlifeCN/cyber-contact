@@ -42,6 +42,8 @@ done
 
 mysql -u root 2>&1 < /opt/cyberlife/service/cyber-contact/create_table.sql | tee /root/cyber-contact.rpm.post.log
 
+mkdir -p /opt/cyberlife/logs
+
 systemctl enable cyber-contact.service
 systemctl restart cyber-contact.service
 systemctl enable cyber-contact-swagger.service
